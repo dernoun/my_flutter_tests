@@ -12,10 +12,10 @@ class IconAction<T> extends PopupMenuEntry<T> {
   final T value;
 
   const IconAction(
-      {Key key,
-      this.value,
-      this.icon,
-      this.title,
+      {Key? key,
+      required this.value,
+      required this.icon,
+      required this.title,
       this.danger = false,
       this.height = XPlainDimensions.actionHeight})
       : super(key: key);
@@ -24,7 +24,7 @@ class IconAction<T> extends PopupMenuEntry<T> {
   _IconActionState createState() => _IconActionState<T>();
 
   @override
-  bool represents(T value) {
+  bool represents(T? value) {
     return value == this.value;
   }
 }
@@ -55,7 +55,12 @@ class IconActionButton extends StatelessWidget {
   final Function onTap;
 
   const IconActionButton(
-      {Key key, this.icon, this.title, this.height, this.danger, this.onTap})
+      {Key? key,
+      required this.icon,
+      required this.title,
+      required this.height,
+      required this.danger,
+      required this.onTap})
       : super(key: key);
 
   @override
@@ -64,7 +69,7 @@ class IconActionButton extends StatelessWidget {
       data: MediaQuery.of(context)
           .copyWith(devicePixelRatio: 1.0, textScaleFactor: 1.0),
       child: InkWell(
-        onTap: onTap,
+        onTap: onTap(),
         child: Container(
           height: height,
           width: 162,
@@ -78,12 +83,12 @@ class IconActionButton extends StatelessWidget {
                 child: IconTheme(
                   data: IconThemeData(
                       size: 16, color: danger ? Colors.red : Colors.grey),
-                  child: icon ?? Container(),
+                  child: icon,
                 ),
               ),
               Expanded(
                 child: DefaultTextStyle(
-                  style: Theme.of(context).textTheme.bodyText2.copyWith(
+                  style: Theme.of(context).textTheme.bodyText2!.copyWith(
                       color: danger ? Colors.red : Colors.grey,
                       fontWeight: FontWeight.w600,
                       fontSize: 12),

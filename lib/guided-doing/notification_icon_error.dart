@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -95,7 +95,7 @@ class DashboardHeader extends StatelessWidget {
 class _GreetingUserText extends StatelessWidget {
   final String username;
 
-  const _GreetingUserText({Key key, this.username}) : super(key: key);
+  const _GreetingUserText({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -117,14 +117,14 @@ class _ActionButton extends StatelessWidget {
   final Function onPressed;
   final Widget icon;
 
-  const _ActionButton({Key key, @required this.onPressed, @required this.icon})
+  const _ActionButton({Key? key, required this.onPressed, required this.icon})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: icon,
-      onPressed: onPressed,
+      onPressed: onPressed(),
       color: Colors.grey,
     );
   }
@@ -164,6 +164,7 @@ class UserActionButton extends StatelessWidget {
             'Account Settings',
             style: TextStyle(fontWeight: FontWeight.w800)),
         value: UserAction.profile,
+        icon: Icon(Icons.headset),
       ),
       IconAction(
         title: Text(
@@ -171,6 +172,7 @@ class UserActionButton extends StatelessWidget {
             'Logout',
             style: TextStyle(fontWeight: FontWeight.w800)),
         value: UserAction.logout,
+        icon: Icon(Icons.headset),
       ),
     ];
   }
